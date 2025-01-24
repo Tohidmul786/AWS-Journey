@@ -354,7 +354,10 @@ You should see the message "Welcome to My Website Hosted on Apache! 🚀".
 Apache isn’t working: Ensure your EC2 instance’s Security Group allows port 80 (HTTP) and port 443 (HTTPS) traffic.
 Can’t connect via SSH: Verify your .pem file permissions (chmod 400 your-key.pem).
 Website doesn’t load over HTTPS: This guide covers HTTP traffic only. For HTTPS, set up SSL certificates using tools like Let's Encrypt.
-AWS-EC2-SETUP-WEBSERVER-WINDOWS
+
+
+**AWS-EC2-SETUP-WEBSERVER-WINDOWS**
+
 🚀 Hosting a Website on a Windows EC2 Instance
 This guide will help you set up a web server on an Amazon EC2 Windows instance using IIS (Internet Information Services). By the end of this tutorial, you’ll have a simple website hosted and accessible via your instance’s public IP address.
 
@@ -368,28 +371,32 @@ Ensure you have the following:
 If you don't have an EC2 instance yet, create one with the Windows Server AMI in the default VPC.
 
 🛠️ Step-by-Step Guide
-Step 1: Connect to Your Windows EC2 Instance via RDP
+**Step 1**: Connect to Your Windows EC2 Instance via RDP
 In the AWS Management Console, navigate to EC2 > Instances.
 Select your Windows instance and click Connect.
 Under the RDP Client tab, download the Remote Desktop File and note down the public IP address.
 Decrypt the administrator password using your private key file.
 Open the downloaded RDP file, enter the administrator credentials, and connect to the instance.
-Step 2: Install IIS (Internet Information Services)
+**Step 2**: Install IIS (Internet Information Services)
 Once connected to the instance:
 
-Open Server Manager from the Start Menu.
-Click on Manage > Add Roles and Features.
+**Open Server Manager from the Start Menu.**
+**Click on Manage** > Add Roles and Features.
 In the Add Roles and Features Wizard:
+
 Installation Type: Select Role-based or feature-based installation.
 Server Selection: Select your EC2 instance.
+
 Server Roles: Check Web Server (IIS) and click Next.
 Click Next until you reach the Confirmation page, then click Install.
 Wait for the installation to complete and close the wizard.
-Step 3: Start IIS and Test the Default Website
+
+**Step 3**: Start IIS and Test the Default Website
 Open a web browser within the Windows instance.
 Enter http://localhost in the address bar.
 You should see the default IIS welcome page, indicating that IIS is running.
-Step 4: Adjust Security Group Rules for HTTP Traffic
+
+**Step 4**: Adjust Security Group Rules for HTTP Traffic
 Allow HTTP (port 80) traffic by modifying your instance’s Security Group:
 
 In the AWS Management Console, navigate to EC2 > Security Groups.
@@ -422,5 +429,53 @@ You should see your custom webpage.
 Website not loading? Ensure port 80 is open in the instance’s Security Group.
 Can’t connect via RDP? Verify that port 3389 (RDP) is open and that you’re using the correct private key and administrator password.
 Custom website not displaying? Check that your website files are in the C:\inetpub\wwwroot directory.
+
+Got it! It sounds like you're trying to launch an AWS EC2 (Elastic Compute Cloud) virtual machine from a Windows environment. Here’s a general guide to get you started:
+
+### 1. **Create an AWS Account**
+   If you don't already have an AWS account, you can sign up at [AWS](https://aws.amazon.com/).
+
+### 2. **Set Up AWS CLI (Optional)**
+   If you'd like to manage AWS resources from the command line, you can install the AWS Command Line Interface (CLI):
+   - Download and install the AWS CLI from [here](https://aws.amazon.com/cli/).
+   - After installation, configure it with your credentials using the following command:
+     ```
+     aws configure
+     ```
+     Enter your AWS Access Key, Secret Key, region, and preferred output format.
+
+### 3. **Launch EC2 Instance (Virtual Machine) from AWS Console**
+   - **Sign in** to the [AWS Management Console](https://console.aws.amazon.com/).
+   - Go to **EC2** under the "Compute" section.
+   - Click on **Launch Instance** to create a new virtual machine (EC2 instance).
+   - Select the **Amazon Machine Image (AMI)**: Choose a base image like Amazon Linux, Ubuntu, or Windows.
+   - **Choose an Instance Type**: Select an instance type depending on your needs (e.g., t2.micro for free tier users).
+   - **Configure Instance Details**: Adjust settings (e.g., number of instances, network settings).
+   - **Add Storage**: Specify how much disk space you need (the default is typically fine for most cases).
+   - **Add Tags** (Optional): You can add tags to organize your instances.
+   - **Configure Security Group**: Create a new security group or select an existing one. Make sure to open necessary ports like 22 for SSH (Linux) or 3389 for RDP (Windows).
+   - **Review and Launch**: Review your settings, then click "Launch".
+   - **Select Key Pair**: Create a new key pair or use an existing one. This will be used to access the VM securely.
+
+### 4. **Connect to Your EC2 Instance**
+   - Once your EC2 instance is up and running, you'll see its public IP address.
+   - For **Linux** instances, you can SSH into the VM using:
+     ```
+     ssh -i /path/to/your-key.pem ec2-user@your-public-ip
+     ```
+   - For **Windows** instances, you will need to use Remote Desktop Protocol (RDP):
+     - Click "Connect" in the EC2 console.
+     - Select "RDP client" and download the Remote Desktop file.
+     - Use the username "Administrator" and the password generated from your private key.
+     - After all you can go to some setup in Server Manager then after complete setup
+     - Follow the path in file manager "C/inetpub/wwwroot/files (what we have to edit)".
+    
+     
+  🛠️ **Step-by-Step Guide Summary **
+  
+    -Come back to the instance and click the public ip address .
+    -Open the webpage by refreshing and check what you can edit in your virtual  windows.
+  
+   
 # AWS-Journey
 Journey of AWS login 
